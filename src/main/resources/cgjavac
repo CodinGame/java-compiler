@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar /usr/src/codingame/java-compiler/java-compiler.jar "$@"

@@ -1,2 +1,3 @@
 # java-compiler
-A java compiler which generates the expect json as result
+
+A java compiler which generates the expected json as result.

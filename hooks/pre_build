@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "=> Building the java compiler jar"
+docker run \
+    -v $(pwd):/usr/src/java-compiler \
+    -w /usr/src/java-compiler \
+    maven:3 \
+    mvn clean package
