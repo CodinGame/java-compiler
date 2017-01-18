@@ -1,4 +1,4 @@
-package com.codingame.codemachine.compilers.java.core;
+package com.codingame.codemachine.compiler.java.core;
 
 public class CompilationLogDto {
     private CompilationLogKind kind;

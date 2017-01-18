@@ -1,8 +1,8 @@
-package com.codingame.codemachine.compilers.java;
+package com.codingame.codemachine.compiler.java;
 
-import com.codingame.codemachine.compilers.java.core.CompilationLogDto;
-import com.codingame.codemachine.compilers.java.core.CompilationLogKind;
-import com.codingame.codemachine.compilers.java.core.CompilationResult;
+import com.codingame.codemachine.compiler.java.core.CompilationLogDto;
+import com.codingame.codemachine.compiler.java.core.CompilationLogKind;
+import com.codingame.codemachine.compiler.java.core.CompilationResult;
 import com.google.gson.Gson;
 
 import javax.tools.Diagnostic;

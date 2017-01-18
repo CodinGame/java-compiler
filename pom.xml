@@ -33,7 +33,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.codingame.codemachine.compilers.java.CodinGameJavaCompiler</mainClass>
+							<mainClass>com.codingame.codemachine.compiler.java.CodinGameJavaCompiler</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
