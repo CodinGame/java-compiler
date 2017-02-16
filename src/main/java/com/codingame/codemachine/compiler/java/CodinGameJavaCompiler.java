@@ -48,7 +48,6 @@ public class CodinGameJavaCompiler {
                 }
             }
     
-            System.out.println("CG> redirect-streams -i \"err\" \"compilation\"");
             if (!files.isEmpty()) {
                 Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromStrings(files);
                 JavaCompiler.CompilationTask task =
@@ -97,7 +96,6 @@ public class CodinGameJavaCompiler {
                 System.err.println("no source file");
                 resultCode = 2;
             }
-            System.out.println("CG> redirect-streams -r -i \"err\" \"compilation\"");
         }
 
         System.exit(resultCode);
