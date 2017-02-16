@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.tools.Diagnostic;
@@ -74,13 +73,13 @@ public class CodinGameJavaCompiler {
                         continue;
                     }
                     
-                    System.err.println(String.format("%s:%d: %s: %s\n%s\n%s^", 
+                    System.err.println(String.format("%s:%d: %s: %s\n%s\n%"+diagnostic.getColumnNumber()+"s", 
                             diagnostic.getSource().getName(),
                             diagnostic.getLineNumber(),
                             diagnostic.getKind().name().toLowerCase(),
                             diagnostic.getMessage(null),
                             line,
-                            String.join("", Collections.nCopies((int)diagnostic.getColumnNumber() - 1, " "))
+                            "^"
                             ));
                     
                     System.out.println(String.format("CG> annotate --type \"%s\" --file \"%s\" --position \"%s\" --message \"%s\"",
