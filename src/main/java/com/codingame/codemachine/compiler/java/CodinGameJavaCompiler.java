@@ -53,10 +53,6 @@ public class CodinGameJavaCompiler {
                     compiler.getTask(null, fileManager, diagnosticsCollector, options, null, compilationUnits);
                 boolean success = task.call();
                 for (Diagnostic<? extends JavaFileObject> diagnostic : diagnosticsCollector.getDiagnostics()) {
-                    
-                    LineNumberReader reader = new LineNumberReader(new StringReader(diagnostic.getSource().getCharContent(true).toString()));
-                    String line = reader.lines().skip(diagnostic.getLineNumber() - 1).limit(1).findAny().get();
-                    
                     String type = null;
                     switch (diagnostic.getKind()) {
                     case ERROR:
@@ -73,21 +69,34 @@ public class CodinGameJavaCompiler {
                         continue;
                     }
                     
-                    System.err.println(String.format("%s:%d: %s: %s\n%s\n%"+diagnostic.getColumnNumber()+"s", 
-                            diagnostic.getSource().getName(),
-                            diagnostic.getLineNumber(),
-                            diagnostic.getKind().name().toLowerCase(),
-                            diagnostic.getMessage(null),
-                            line,
-                            "^"
-                            ));
+                    if (diagnostic.getLineNumber() >= 0 && diagnostic.getColumnNumber() >= 0) {
+                        LineNumberReader reader = new LineNumberReader(new StringReader(diagnostic.getSource().getCharContent(true).toString()));
+                        String line = reader.lines().skip(diagnostic.getLineNumber() - 1).limit(1).findAny().get();
+                        
+                        System.err.println(String.format("%s:%d: %s: %s\n%s\n%"+diagnostic.getColumnNumber()+"s", 
+                                diagnostic.getSource().getName(),
+                                diagnostic.getLineNumber(),
+                                diagnostic.getKind().name().toLowerCase(),
+                                diagnostic.getMessage(null),
+                                line,
+                                "^"
+                                ));
+                    } else {
+                        System.err.println(String.format("%s: %s: %s", 
+                                diagnostic.getSource().getName(),
+                                diagnostic.getKind().name().toLowerCase(),
+                                diagnostic.getMessage(null)
+                                ));
+                    }
                     
-                    System.out.println(String.format("CG> annotate --type \"%s\" --file \"%s\" --position \"%s\" --message \"%s\"",
-                            type,
-                            diagnostic.getSource().getName(),
-                            diagnostic.getLineNumber()+":"+diagnostic.getColumnNumber(),
-                            diagnostic.getMessage(null).replaceAll("\"","\\\"")
-                            ));
+                    if (files.contains(diagnostic.getSource().getName())) {
+                        System.out.println(String.format("CG> annotate --type \"%s\" --file \"%s\" --position \"%s\" --message \"%s\"",
+                                type,
+                                diagnostic.getSource().getName(),
+                                diagnostic.getLineNumber()+":"+diagnostic.getColumnNumber(),
+                                diagnostic.getMessage(null).replaceAll("\"","\\\"")
+                                ));
+                    }
                 }
                 resultCode = success ? 0 : 1;
             }
