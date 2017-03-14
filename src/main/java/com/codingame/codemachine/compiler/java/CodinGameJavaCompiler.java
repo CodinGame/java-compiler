@@ -94,7 +94,7 @@ public class CodinGameJavaCompiler {
                                 type,
                                 diagnostic.getSource().getName(),
                                 diagnostic.getLineNumber()+":"+diagnostic.getColumnNumber(),
-                                diagnostic.getMessage(null).replaceAll("\"","\\\"")
+                                diagnostic.getMessage(null).replaceAll("\"","\\\"").replaceAll("\n","\\\\n")
                                 ));
                     }
                 }
