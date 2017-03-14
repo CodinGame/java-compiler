@@ -2,6 +2,6 @@
 
 echo "CG> redirect-streams --input err compilation"
 
-java -Dcodingame.compiler.output=/project/results/compilation.json -jar /usr/src/codingame/java-compiler/java-compiler.jar "$@"
+java -jar /usr/src/codingame/java-compiler/java-compiler.jar "$@"
 
 echo "CG> redirect-streams --reset --input err compilation"
