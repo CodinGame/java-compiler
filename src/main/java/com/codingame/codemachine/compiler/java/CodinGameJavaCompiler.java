@@ -99,10 +99,8 @@ public class CodinGameJavaCompiler {
                     }
                 }
                 resultCode = success ? 0 : 1;
-            }
-            else {
-                System.err.println("no source file");
-                resultCode = 2;
+            } else {
+                resultCode = 0;
             }
         }
 
