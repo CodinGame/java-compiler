@@ -24,10 +24,10 @@ public class CodinGameJavaCompiler {
 
             List<String> files = new ArrayList<>();
             List<String> options = new ArrayList<>();
-    
+
             for (int i = 0; i < args.length; ++i) {
                 String arg = args[i];
-    
+
                 if (arg.startsWith("-")) {
                     int paramCount = compiler.isSupportedOption(arg);
                     if (paramCount < 0) {
@@ -46,7 +46,7 @@ public class CodinGameJavaCompiler {
                     files.add(arg);
                 }
             }
-    
+
             if (!files.isEmpty()) {
                 Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjectsFromStrings(files);
                 JavaCompiler.CompilationTask task =
@@ -68,12 +68,12 @@ public class CodinGameJavaCompiler {
                     case OTHER:
                         continue;
                     }
-                    
+
                     if (diagnostic.getLineNumber() >= 0 && diagnostic.getColumnNumber() >= 0) {
                         LineNumberReader reader = new LineNumberReader(new StringReader(diagnostic.getSource().getCharContent(true).toString()));
                         String line = reader.lines().skip(diagnostic.getLineNumber() - 1).limit(1).findAny().get();
-                        
-                        System.err.println(String.format("%s:%d: %s: %s\n%s\n%"+diagnostic.getColumnNumber()+"s", 
+
+                        System.err.println(String.format("%s:%d: %s: %s\n%s\n%"+diagnostic.getColumnNumber()+"s",
                                 diagnostic.getSource().getName(),
                                 diagnostic.getLineNumber(),
                                 diagnostic.getKind().name().toLowerCase(),
@@ -82,13 +82,13 @@ public class CodinGameJavaCompiler {
                                 "^"
                                 ));
                     } else {
-                        System.err.println(String.format("%s: %s: %s", 
+                        System.err.println(String.format("%s: %s: %s",
                                 diagnostic.getSource().getName(),
                                 diagnostic.getKind().name().toLowerCase(),
                                 diagnostic.getMessage(null)
                                 ));
                     }
-                    
+
                     if (files.contains(diagnostic.getSource().getName())) {
                         System.out.println(String.format("CG> annotate --type \"%s\" --file \"%s\" --position \"%s\" --message \"%s\"",
                                 type,
@@ -99,10 +99,8 @@ public class CodinGameJavaCompiler {
                     }
                 }
                 resultCode = success ? 0 : 1;
-            }
-            else {
-                System.err.println("no source file");
-                resultCode = 2;
+            } else {
+                resultCode = 0;
             }
         }
 
