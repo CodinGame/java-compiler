@@ -1,10 +1,10 @@
 #!/bin/bash
 
-echo "CG> redirect-streams --input err compilation"
+echo "TECHIO> redirect-streams --input err compilation"
 
 java -jar /usr/src/codingame/java-compiler/java-compiler.jar "$@"
 compilationExitCode=$?
 
-echo "CG> redirect-streams --reset --input err compilation"
+echo "TECHIO> redirect-streams --reset --input err compilation"
 
 exit $compilationExitCode
